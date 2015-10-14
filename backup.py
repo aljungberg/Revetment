@@ -27,6 +27,12 @@ elif sys.argv[1] == 'list':
         args += sys.argv[3:]
     else:
         args += [repo, ]
+elif sys.argv[1] == 'delete':
+    args = [
+        "delete",
+    ]
+    args += ["%s::%s" % (repo, sys.argv[2]), ]
+    args += sys.argv[3:]
 elif sys.argv[1] == 'extract':
     args = [
         "extract",
