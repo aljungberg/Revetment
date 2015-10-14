@@ -42,8 +42,8 @@ elif sys.argv[1] == 'create':
     name = sys.argv[2] if len(sys.argv) > 2 else datetime.date.today().isoformat()
     args = [
         "create",
-        "-v",
         "--stats",
+        "--numeric-owner",  # we don't have usernames anyhow due to being in Docker
         "--exclude-caches",
         "--do-not-cross-mountpoints",
         "%s::%s" % (repo, name)  
