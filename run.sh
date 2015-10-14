@@ -39,7 +39,6 @@ if not_mounted "$SSHFS_MOUNT"; then
 fi
 
 cd "$BACKUP_ROOT"
-ls -a
 
 if [[ ! -e "$REPOSITORY" ]]; then
   echo "Creating repository..."

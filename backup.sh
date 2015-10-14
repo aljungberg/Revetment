@@ -20,6 +20,7 @@ EXCLUDES="
 /var/cache
 /media
 /lost+found
+*ignore.me
 "
 
 
