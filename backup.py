@@ -67,6 +67,8 @@ elif sys.argv[1] == 'create':
         args += ["--exclude", exclude]
 
     args += list(strip_paths(os.getenv("BACKUP_PATHS").split("\n")))
+else:
+    raise ValueError("unknown command")
 
 # sys.stdout.write("cwd: %s args: %r\n" % (os.getcwd(), args))
 # sys.stdout.flush()
