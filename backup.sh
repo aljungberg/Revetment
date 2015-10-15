@@ -18,12 +18,23 @@ abspath() {
 
 set -xe
 
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <command>"
+    exit 1
+fi
+
 BACKUP_MOUNT_FLAGS="ro"
 
 if [[ "$1" == "extract" ]]; then
     BACKUP_ROOT="$3"
     mkdir -p "$BACKUP_ROOT"
     BACKUP_MOUNT_FLAGS="rw"
+fi
+
+ATTIC_KEYS_MOUNT_FLAGS="ro"
+
+if [[ "$1" == "init" ]]; then
+    ATTIC_KEYS_MOUNT_FLAGS="rw"
 fi
 
 # -v doesn't handle relative paths.
@@ -39,7 +50,7 @@ docker run \
     --rm \
     -v "$SSH_KNOWN_HOSTS":/known_hosts:ro \
     -v "$SSH_ID":/id_rsa:ro \
-    -v "$ATTIC_KEYS":/root/.attic:rw \
+    -v "$ATTIC_KEYS":/root/.attic:"$ATTIC_KEYS_MOUNT_FLAGS" \
     -v "$ATTIC_CACHE":/root/.cache:rw \
     -v "$BACKUP_ROOT":/b:"$BACKUP_MOUNT_FLAGS" \
     -e KEEP_DAILY="$KEEP_DAILY" \

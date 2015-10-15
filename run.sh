@@ -17,7 +17,7 @@ not_mounted() {
 }
 
 if [[ ! -r "/root/.attic" ]]; then
-  echo "Add /root/.attic as a volume for encryption keys. On the first run it needs to be read-write."
+  echo "Add /root/.attic as a volume for encryption keys."
   exit 1
 fi
 
@@ -40,16 +40,24 @@ fi
 
 cd "$BACKUP_ROOT"
 
-if [[ ! -e "$REPOSITORY" ]]; then
-  echo "Creating repository..."
-  printf "\n\n" | attic init --encryption=keyfile "$REPOSITORY"
-fi
+if [[ "$1" == "init" ]]; then
+    if [[ ! -w "/root/.attic" ]]; then
+      echo "/root/.attic needs to be read-write during init."
+      exit 1
+    fi
 
-backup.py $@
+    echo "Creating repository..."
+    printf "\n\n" | attic init --encryption=keyfile "$REPOSITORY"
+elif [[ ! -e "$REPOSITORY" ]]; then
+    echo "No repository found. Did you run 'init'?"
+    exit 1
+else
+    backup.py $@
 
-if [[ "$1" == "create" ]]; then
-    # Keep a very short history.
-    attic prune -v "$REPOSITORY" -d $KEEP_DAILY
+    if [[ "$1" == "create" ]]; then
+        # Keep a very short history.
+        attic prune -v "$REPOSITORY" -d $KEEP_DAILY
+    fi
 fi
 
 fusermount -u "$SSHFS_MOUNT"
