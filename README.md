@@ -25,23 +25,22 @@ The other benefit is security. Normally you must run your backup scripts as root
 
     curl https://raw.githubusercontent.com/aljungberg/Revetment/master/my-backup-sample.sh >my-backup.sh
     pico my-backup.sh   # choose backup parameters
-    my-backup.sh init
+    bash my-backup.sh init
 
 #### Take a backup
 
-    my-backup.sh create [archive name]  # defaults to making an archive named by YYYY-MM-DD date stamp.
+    bash my-backup.sh create [archive name]  # defaults to making an archive named by date in YYYY-MM-DD format.
     
 #### Verify a backup
 
-    my-backup.sh check
+    bash my-backup.sh check
     
 #### Inspect backups
     
-    my-backup.sh list
-    my-backup.sh list 2015-10-13
+    bash my-backup.sh list
+    bash my-backup.sh list 2015-10-13
     
 #### Restore a backup
 
     # restore files to the given destination folder
-    my-backup.sh extract <archive name> <destination> [file1 [file2 ...]]
-    
+    bash my-backup.sh extract <archive name> <destination> [file1 [file2 ...]]
