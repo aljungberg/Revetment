@@ -1,11 +1,11 @@
 #!/bin/bash
 
-SSH_PATH="3753@usw-s003.rsync.net:test/"
-SSH_KNOWN_HOSTS="$PWD/test/known_hosts"
-SSH_ID="$PWD/test/id_rsa"
-BACKUP_ROOT="$PWD/test/backup/"
-ATTIC_KEYS="$PWD/test/attic"
-ATTIC_CACHE="$PWD/test/cache"
+SSH_PATH="example.com:test/"
+SSH_KNOWN_HOSTS="test/known_hosts"
+SSH_ID="test/id_rsa"
+BACKUP_ROOT="test/backup/"
+ATTIC_KEYS="test/attic"
+ATTIC_CACHE="test/cache"
 KEEP_DAILY=2
 # What to back up. One name per line. Use ./ to back up everything in BACKUP_ROOT.
 BACKUP_PATHS="
@@ -23,6 +23,10 @@ EXCLUDES="
 *ignore.me
 "
 
+# http://stackoverflow.com/a/3572105/76900
+abspath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
 
 set -xe
 
@@ -33,6 +37,13 @@ if [[ "$1" == "extract" ]]; then
     mkdir -p "$BACKUP_ROOT"
     BACKUP_MOUNT_FLAGS="rw"
 fi
+
+# -v doesn't handle relative paths.
+ATTIC_CACHE=$(abspath "$ATTIC_CACHE")
+ATTIC_KEYS=$(abspath "$ATTIC_KEYS")
+BACKUP_ROOT=$(abspath "$BACKUP_ROOT")
+SSH_ID=$(abspath "$SSH_ID")
+SSH_KNOWN_HOSTS=$(abspath "$SSH_KNOWN_HOSTS")
 
 docker run \
     --privileged --device=/dev/fuse \
