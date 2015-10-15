@@ -52,10 +52,10 @@ elif [[ ! -e "$REPOSITORY" ]]; then
     echo "No repository found. Did you run 'init'?"
     exit 1
 else
+    echo "Backing up..."
     backup.py $@
 
     if [[ "$1" == "create" ]]; then
-        # Keep a very short history.
         attic prune -v "$REPOSITORY" -d $KEEP_DAILY
     fi
 fi
