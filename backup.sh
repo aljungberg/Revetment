@@ -29,7 +29,7 @@ set -xe
 BACKUP_MOUNT_FLAGS="ro"
 
 if [[ "$1" == "extract" ]]; then
-    BACKUP_ROOT="$2"
+    BACKUP_ROOT="$3"
     mkdir -p "$BACKUP_ROOT"
     BACKUP_MOUNT_FLAGS="rw"
 fi

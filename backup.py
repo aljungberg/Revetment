@@ -50,7 +50,7 @@ elif sys.argv[1] == 'delete':
 elif sys.argv[1] == 'extract':
     args = [
         "extract",
-        "%s::%s" % (repo, sys.argv[3]),
+        "%s::%s" % (repo, sys.argv[2]),
     ] + sys.argv[4:]
 elif sys.argv[1] == 'create':
     name = sys.argv[2] if len(sys.argv) > 2 else datetime.date.today().isoformat()

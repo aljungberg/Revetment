@@ -36,6 +36,6 @@ The other benefit is security. If the backup software is compromised the attacke
 #### Restore a backup
 
     # restore files to the given destination folder
-    backup.sh extract <destination> <archive name> [file1 [file2 ...]]
+    backup.sh extract <archive name> <destination> [file1 [file2 ...]]
     
     
