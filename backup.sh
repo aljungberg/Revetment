@@ -46,7 +46,7 @@ SSH_KNOWN_HOSTS=$(abspath "$SSH_KNOWN_HOSTS")
 mkdir -p "$ATTIC_CACHE"
 mkdir -p "$ATTIC_KEYS"
 
-sudo docker run \
+docker run \
     --privileged --device=/dev/fuse \
     --name backuper \
     --rm \
