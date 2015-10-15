@@ -33,6 +33,6 @@ EXCLUDES="
 /lost+found
 "
 
-### End configuration -- don't edit below this line ###
+### End configuration -- don't edit below this line. ###
 
 source backup.sh $@

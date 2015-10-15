@@ -1,24 +1,27 @@
-### Take backups with Attic
+## Revetment
 
-Dockerised version of Attic operating against any SCP/SSH host through sshfs.
+Extra secure, encrypted, deduplicated, compressed backups against any SFTP (SSH) host.
 
-Benefits:
+Revetment is a Dockerised version of the [Attic](https://attic-backup.org/) backup tool.
 
-- Only 1 dependency: Docker.
-- Secure: read-only mount of what is being backed up.
-- Secure: any security flaws in sshfs or Attic are mitigated through sandboxing.
+- Single dependency: Docker.
+- Flexible: compatible with any SFTP backup server (rsync.net, the server in your closet).
+- Secure: backup process has root-like read access to all files, yet no write access.
+- Sandboxed: an extra layer of protection to mitigate potential security flaws in sshfs or Attic.
+- Always on encryption: no unencrypted data ever leaves the machine.
+- Attic's regular benefits: variable block size deduplication, 256 bit AES encryption with keyfiles, compression, very fast and space efficient when little data has changed.
 
-The main advantage of using this tool is that it has only a single dependency: Docker. This is very helpful when installing on various old running machines on LTS releases that might not have Python 3 and all the other things Attic requires.
+The main advantage of using Revetment is that it only depends on Docker (and Bash). When you need to back up old LTS servers, it might not be easy or advisable to install Python 3 and the other Attic dependencies. With Revetment, just add Docker.
 
-The other benefit is security. If the backup software is compromised the attacker can only read the data to be backed up. That's still bad but at least the attacker can't take over the server without an additional Docker jailbreak compromise. Unlike normal backup scripts which often need read-write access to the whole machine, Attic has read-only access only in this setup.
+The other benefit is security. Normally you must run your backup scripts as root so that any and all files may be backed up. Revetment also requires root but drops the write access and many other root privileges as soon as possible. This means that a compromise in the backup software itself is, although still bad, unlikely to damage the server being backed up.
 
-
-#### Usage
+### Usage
 
 #### Setup
 
-    cp ny-backup-sample.sh my-backup.sh  
+    cp my-backup-sample.sh my-backup.sh  
     pico my-backup.sh   # choose backup parameters
+    my-backup.sh init
 
 #### Take a backup
 
@@ -38,4 +41,3 @@ The other benefit is security. If the backup software is compromised the attacke
     # restore files to the given destination folder
     my-backup.sh extract <archive name> <destination> [file1 [file2 ...]]
     
-

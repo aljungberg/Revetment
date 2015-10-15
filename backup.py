@@ -2,16 +2,17 @@
 
 """
 Attic wrapper which handles excludes and includes as a new-line separated list
-of patterns (to allow spaces in names), and which normalises and relativises path 
-names. The normalisation ensures that the CWD is considered the "root" of the archive
-and gives each archived file a more canonical name.
+of patterns (to allow easy spaces in names), and which normalises and
+relativises path names. The normalisation gives each archived file a name
+relative to the backup root and a more canonical name.
 
-This works around a problem in Attic where it doesn't normalise paths. Consider a FS
-with "cat.txt" in it. If you back up "./", Attic will think of this file as "./cat.txt"
-and apply exclude patterns based on that. But on the other hand if you actually back
-up "cat.txt", Attic will think of this file as just that, "cat.txt". And if you back up
-"./cat.txt" it will /also/ think of it as "cat.txt" -- there is no way to get it to
-think of it as what you'd get with ".".
+The canonical name bit works around a problem in Attic. Consider a FS with
+"cat.txt" in it. If you back up "./", Attic will think of this file as
+"./cat.txt" and apply exclude patterns based on that. But on the other hand if
+you actually back up "cat.txt", Attic will think of this file as just that,
+"cat.txt". And if you back up "./cat.txt" it will /also/ think of it as
+"cat.txt" -- there is no way to get it to think of it as what you'd get with
+".".
 
 So for consistency we always use absolute paths from the backup root (/b/).
 """ 
