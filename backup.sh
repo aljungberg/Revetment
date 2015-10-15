@@ -43,7 +43,10 @@ BACKUP_ROOT=$(abspath "$BACKUP_ROOT")
 SSH_ID=$(abspath "$SSH_ID")
 SSH_KNOWN_HOSTS=$(abspath "$SSH_KNOWN_HOSTS")
 
-docker run \
+mkdir -p "$ATTIC_CACHE"
+mkdir -p "$ATTIC_KEYS"
+
+sudo docker run \
     --privileged --device=/dev/fuse \
     --name backuper \
     --rm \
@@ -56,4 +59,4 @@ docker run \
     -e SSH_PATH="$SSH_PATH" \
     -e BACKUP_PATHS="$BACKUP_PATHS" \
     -e EXCLUDES="$EXCLUDES" \
-    backuper run.sh $@
+    aljungberg/revetment run.sh $@
