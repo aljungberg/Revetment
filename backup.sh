@@ -59,4 +59,5 @@ sudo docker run \
     -e SSH_PATH="$SSH_PATH" \
     -e BACKUP_PATHS="$BACKUP_PATHS" \
     -e EXCLUDES="$EXCLUDES" \
+    -e PYTHONUNBUFFERED=1 \
     aljungberg/revetment run.sh $@
