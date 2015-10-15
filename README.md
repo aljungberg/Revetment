@@ -17,9 +17,14 @@ The other benefit is security. Normally you must run your backup scripts as root
 
 ### Usage
 
-#### Setup
+#### Install
 
-    cp my-backup-sample.sh my-backup.sh  
+    docker pull aljungberg/revetment
+    curl https://raw.githubusercontent.com/aljungberg/Revetment/master/backup.sh >backup.sh
+
+#### Configure and initialise
+
+    curl https://raw.githubusercontent.com/aljungberg/Revetment/master/my-backup-sample.sh >my-backup.sh
     pico my-backup.sh   # choose backup parameters
     my-backup.sh init
 
