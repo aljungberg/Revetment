@@ -12,11 +12,8 @@ RUN chmod 755 /bin/*
 
 RUN mkdir /mnt/backup && mkdir /root/.ssh
 
-ENV SSH_PATH backup@example.com:path/
 ENV BACKUP_NAME main.attic
 ENV BACKUP_ROOT /b/
-ENV BACKUP_PATHS path1 path2
-ENV EXCLUDES /proc /dev /tmp /var/tmp /var/log /var/cache /media /lost+found
 
 USER root
 
