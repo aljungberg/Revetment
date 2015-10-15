@@ -17,25 +17,25 @@ The other benefit is security. If the backup software is compromised the attacke
 
 #### Setup
 
-    cp backup-sample.sh backup.sh  
-    pico backup.sh   # choose backup parameters
+    cp ny-backup-sample.sh my-backup.sh  
+    pico my-backup.sh   # choose backup parameters
 
 #### Take a backup
 
-    backup.sh create [archive name]  # defaults to making an archive named by YYYY-MM-DD date stamp.
+    my-backup.sh create [archive name]  # defaults to making an archive named by YYYY-MM-DD date stamp.
     
 #### Verify a backup
 
-    backup.sh check
+    my-backup.sh check
     
 #### Inspect backups
     
-    backup.sh list
-    backup.sh list 2015-10-13
+    my-backup.sh list
+    my-backup.sh list 2015-10-13
     
 #### Restore a backup
 
     # restore files to the given destination folder
-    backup.sh extract <archive name> <destination> [file1 [file2 ...]]
+    my-backup.sh extract <archive name> <destination> [file1 [file2 ...]]
     
-    
+

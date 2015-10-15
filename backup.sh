@@ -1,27 +1,15 @@
 #!/bin/bash
 
-SSH_PATH="example.com:test/"
-SSH_KNOWN_HOSTS="test/known_hosts"
-SSH_ID="test/id_rsa"
-BACKUP_ROOT="test/backup/"
-ATTIC_KEYS="test/attic"
-ATTIC_CACHE="test/cache"
-KEEP_DAILY=2
+SSH_KNOWN_HOSTS="${SSH_KNOWN_HOSTS:-$HOME/.ssh/known_hosts}"
+SSH_ID="${SSH_ID:-$HOME/.ssh/id_rsa}"
+ATTIC_KEYS="${ATTIC_KEYS:-$HOME/.attic}"
+ATTIC_CACHE="${ATTIC_CACHE:-$HOME/.cache}"
+KEEP_DAILY=${KEEP_DAILY:-2}
 # What to back up. One name per line. Use ./ to back up everything in BACKUP_ROOT.
-BACKUP_PATHS="
-."
+BACKUP_PATHS="${BACKUP_PATHS:-.}"
 # What to exclude. One exclude per line. Attic style wildcards allowed.
-EXCLUDES="
-/proc
-/dev
-/tmp
-/var/tmp
-/var/log
-/var/cache
-/media
-/lost+found
-*ignore.me
-"
+EXCLUDES="${EXCLUDES:-}"
+
 
 # http://stackoverflow.com/a/3572105/76900
 abspath() {
