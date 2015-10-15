@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -e
 
 export SSHFS_MOUNT=/mnt/backup
 export REPOSITORY="$SSHFS_MOUNT"/"$BACKUP_NAME"

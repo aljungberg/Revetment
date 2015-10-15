@@ -16,7 +16,7 @@ abspath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
-set -xe
+set -e
 
 if [ "$#" -lt 1 ]; then
     echo "Usage: $0 <command>"
