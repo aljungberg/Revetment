@@ -1,14 +1,13 @@
 #!/bin/bash
 
-SSH_KNOWN_HOSTS="${SSH_KNOWN_HOSTS:-$HOME/.ssh/known_hosts}"
-SSH_ID="${SSH_ID:-$HOME/.ssh/id_rsa}"
-ATTIC_KEYS="${ATTIC_KEYS:-$HOME/.attic}"
 ATTIC_CACHE="${ATTIC_CACHE:-$HOME/.cache}"
-KEEP_DAILY=${KEEP_DAILY:-2}
-# What to back up. One name per line. Use ./ to back up everything in BACKUP_ROOT.
+ATTIC_KEYS="${ATTIC_KEYS:-$HOME/.attic}"
 BACKUP_PATHS="${BACKUP_PATHS:-.}"
-# What to exclude. One exclude per line. Attic style wildcards allowed.
+BACKUP_ROOT="${BACKUP_ROOT:-/}"
 EXCLUDES="${EXCLUDES:-}"
+KEEP_DAILY=${KEEP_DAILY:-2}
+SSH_ID="${SSH_ID:-$HOME/.ssh/id_rsa}"
+SSH_KNOWN_HOSTS="${SSH_KNOWN_HOSTS:-$HOME/.ssh/known_hosts}"
 
 
 # http://stackoverflow.com/a/3572105/76900

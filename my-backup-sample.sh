@@ -12,8 +12,8 @@ SSH_PATH="example.com:test/"
 # 1 backup per day will be kept for up to this many days. Default: 2.
 # KEEP_DAILY=2
 
-# Folder to back up.
-BACKUP_ROOT="test/backup/"
+# Root of the file system to back up. Default: /.
+# BACKUP_ROOT="/"
 
 # What to back up within BACKUP_ROOT. One name per line. Use ./ to back up everything in BACKUP_ROOT. Default: ".".
 BACKUP_PATHS="
