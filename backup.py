@@ -50,6 +50,7 @@ elif sys.argv[1] == 'delete':
 elif sys.argv[1] == 'extract':
     args = [
         "extract",
+        "--strip-components", "1",  # extract right into /b/ rather than /b/b.
         "%s::%s" % (repo, sys.argv[2]),
     ] + sys.argv[4:]
 elif sys.argv[1] == 'create':
