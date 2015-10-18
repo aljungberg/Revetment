@@ -78,7 +78,8 @@ elif sys_args[1] == 'extract':
 
     args += ["%s::%s" % (repo, remaining_args[2]),]
 
-    args += remaining_args[4:]
+    # Actual files to extract need to be normalised too. E.g. to extra file1.txt, turn it into /b/file1.txt.
+    args += [p[1:] for p in strip_paths(remaining_args[4:])]
 elif sys_args[1] == 'create':
     name = sys_args[2] if len(sys_args) > 2 else datetime.date.today().isoformat()
     args = [
