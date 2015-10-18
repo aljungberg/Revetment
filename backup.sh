@@ -61,3 +61,7 @@ docker run \
     -e EXCLUDES="$EXCLUDES" \
     -e PYTHONUNBUFFERED=1 \
     aljungberg/revetment run.sh $@
+
+if [[ "$1" == "init" ]]; then
+    echo "Back up the encryption key(s) in '$ATTIC_KEYS' or the backup will be unreadable."
+fi
