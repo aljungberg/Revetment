@@ -35,7 +35,7 @@ chmod -R u=rwX,g=,o= /root/.ssh
 if not_mounted "$SSHFS_MOUNT"; then
   echo "Mounting backup server..."
   mkdir -p "$SSHFS_MOUNT"
-  sshfs -o auto_cache,reconnect "$SSH_PATH" "$SSHFS_MOUNT"
+  sshfs $SSHFS_OPTIONS "$SSH_PATH" "$SSHFS_MOUNT"
 fi
 
 cd "$BACKUP_ROOT"

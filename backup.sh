@@ -6,6 +6,7 @@ BACKUP_PATHS="${BACKUP_PATHS:-.}"
 BACKUP_ROOT="${BACKUP_ROOT:-/}"
 EXCLUDES="${EXCLUDES:-}"
 KEEP_DAILY=${KEEP_DAILY:-2}
+SSHFS_OPTIONS="${SSHFS_OPTIONS:--o reconnect -o auto_cache -o cache=yes -o cache_timeout=180 -o kernel_cache -o compression=no -o big_writes -o Ciphers=arcfour}"
 SSH_ID="${SSH_ID:-$HOME/.ssh/id_rsa}"
 SSH_KNOWN_HOSTS="${SSH_KNOWN_HOSTS:-$HOME/.ssh/known_hosts}"
 
@@ -59,6 +60,7 @@ docker run \
     -e SSH_PATH="$SSH_PATH" \
     -e BACKUP_PATHS="$BACKUP_PATHS" \
     -e EXCLUDES="$EXCLUDES" \
+    -e SSHFS_OPTIONS="$SSHFS_OPTIONS" \
     -e PYTHONUNBUFFERED=1 \
     aljungberg/revetment run.sh $@
 
