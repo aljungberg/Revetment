@@ -52,7 +52,7 @@ elif [[ ! -e "$REPOSITORY" ]]; then
     echo "No repository found. Did you run 'init'?"
     exit 1
 else
-    echo "Backing up..."
+    echo "Running Attic..."
     backup.py $@
 
     if [[ "$1" == "create" ]]; then
@@ -60,4 +60,5 @@ else
     fi
 fi
 
+echo "Unmounting backup..."
 fusermount -u "$SSHFS_MOUNT"

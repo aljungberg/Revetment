@@ -26,6 +26,22 @@ def strip_paths(paths):
     """Ensure all paths are normalised and begin with '/b/'."""
     return (os.path.normpath("/b/" + path) for path in paths if len(path))
 
+def extract_optional_args(sys_args, optional_args):
+    r = []
+    sys_args = sys_args[:]
+
+    for a in optional_args:
+        a, has_param = (a[:-1], True) if ":" in a else (a, False)
+        if not a in sys_args:
+            continue    
+        i = sys_args.index(a)
+        r.append(sys_args.pop(i))
+        if has_param:
+            r.append(sys_args.pop(i))
+    
+    return r, sys_args
+
+
 repo = os.path.join(os.getenv("SSHFS_MOUNT"), os.getenv("BACKUP_NAME", "backup.attic"))
 sys_args = sys.argv[:]
 
@@ -50,11 +66,19 @@ elif sys_args[1] == 'delete':
     args += ["%s::%s" % (repo, sys_args[2]), ]
     args += sys_args[3:]
 elif sys_args[1] == 'extract':
+    # Pass through -v and -c.
+    optional_args, remaining_args = extract_optional_args(sys_args, ('-h', '-n', '--dry-run', '-v', '--verbose', '--numeric-owner'))
+
     args = [
         "extract",
         "--strip-components", "1",  # extract right into /b/ rather than /b/b.
-        "%s::%s" % (repo, sys_args[2]),
-    ] + sys_args[4:]
+    ]
+    
+    args += optional_args
+
+    args += ["%s::%s" % (repo, remaining_args[2]),]
+
+    args += remaining_args[4:]
 elif sys_args[1] == 'create':
     name = sys_args[2] if len(sys_args) > 2 else datetime.date.today().isoformat()
     args = [
@@ -67,15 +91,8 @@ elif sys_args[1] == 'create':
     ]
     
     # Pass through -v and -c.
-    optional_args = ('-v', '--verbose', "-c:", "--checkpoint-interval:")
-    for a in optional_args:
-        a, has_param = (a[:-1], True) if ":" in a else (a, False)
-        if not a in sys_args:
-            continue    
-        i = sys_args.index(a)
-        args.append(sys_args.pop(i))
-        if has_param:
-            args.append(sys_args.pop(i))
+    optional_args, remaining_args = extract_optional_args(sys_args, ('-h', '-v', '--verbose', "-c:", "--checkpoint-interval:"))
+    args.extend(optional_args)
 
     for exclude in strip_paths(os.getenv("EXCLUDES").split("\n")):
         args += ["--exclude", exclude]
