@@ -26,10 +26,15 @@ The other benefit is security. Normally you must run your backup scripts as root
     curl https://raw.githubusercontent.com/aljungberg/Revetment/master/my-backup-sample.sh >my-backup.sh
     pico my-backup.sh   # choose backup parameters
     bash my-backup.sh init
+    # copy ~/.attic/keys/ somewhere safe.
 
 #### Take a backup
 
     bash my-backup.sh create [archive name]  # defaults to making an archive named by date in YYYY-MM-DD format.
+    
+#### Make it regular
+
+    echo '* 2 * * * root /bin/bash /root/my-backup.sh create >/dev/null' >>/etc/crontab
     
 #### Verify a backup
 
@@ -44,3 +49,9 @@ The other benefit is security. Normally you must run your backup scripts as root
 
     # restore files to the given destination folder
     bash my-backup.sh extract <archive name> <destination> [file1 [file2 ...]]
+
+### Good habits
+
+- Remember to verify your backups regularly: use `bash my-backup.sh check`.
+- Extract some files from every new backup using a different machine than the one taking the backups to confirm that you have the ability to (you copied the SSH keys and attic keys you need).
+

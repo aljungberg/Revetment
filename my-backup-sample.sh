@@ -16,6 +16,7 @@ SSH_PATH="example.com:test/"
 # BACKUP_ROOT="/"
 
 # What to back up within BACKUP_ROOT. One name per line. Use ./ to back up everything in BACKUP_ROOT. Default: ".".
+# Note that the "do not cross mount points" option is in use so to back up more than one partition, specify each.
 BACKUP_PATHS="
 file1
 file2
