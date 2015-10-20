@@ -34,7 +34,7 @@ The other benefit is security. Normally you must run your backup scripts as root
     
 #### Make it regular
 
-    echo '* 2 * * * root /bin/bash /root/my-backup.sh create >/dev/null' >>/etc/crontab
+    echo '0 2 * * * root /bin/bash /root/my-backup.sh create >/dev/null' >>/etc/crontab
     
 #### Verify a backup
 
