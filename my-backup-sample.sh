@@ -36,4 +36,8 @@ EXCLUDES="
 
 ### End configuration -- don't edit below this line. ###
 
-source backup.sh $@
+if [[ -e "./backup.sh" ]]; then
+    source ./backup.sh $@
+else
+    source $(dirname "$0")/backup.sh $@
+fi
