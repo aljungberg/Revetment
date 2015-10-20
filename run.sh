@@ -17,12 +17,12 @@ not_mounted() {
 }
 
 if [[ ! -r "/root/.attic" ]]; then
-  echo "Add /root/.attic as a volume for encryption keys."
+  >&2 echo  "Add /root/.attic as a volume for encryption keys."
   exit 1
 fi
 
 if [[ ! -w "/root/.cache" ]]; then
-  echo "Warning: for performance reasons it's recommended to add /root/.cache as a writable volume for the attic cache."
+  >&2 echo  "Warning: for performance reasons it's recommended to add /root/.cache as a writable volume for the attic cache."
   mkdir -p /root/.cache
 fi
 
@@ -42,14 +42,14 @@ cd "$BACKUP_ROOT"
 
 if [[ "$1" == "init" ]]; then
     if [[ ! -w "/root/.attic" ]]; then
-      echo "/root/.attic needs to be read-write during init."
+      >&2 echo  "/root/.attic needs to be read-write during init."
       exit 1
     fi
 
     echo "Creating repository..."
     printf "\n\n" | attic init --encryption=keyfile "$REPOSITORY"
 elif [[ ! -e "$REPOSITORY" ]]; then
-    echo "No repository found. Did you run 'init'?"
+    >&2 echo  "No repository found. Did you run 'init'?"
     exit 1
 else
     echo "Running Attic..."
