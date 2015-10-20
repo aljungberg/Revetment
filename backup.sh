@@ -23,6 +23,16 @@ if [ "$#" -lt 1 ]; then
     exit 1
 fi
 
+if [ ! -f "$SSH_KNOWN_HOSTS" ]; then
+    >&2 echo "Error: unable to read $SSH_KNOWN_HOSTS."
+    exit 1
+fi
+
+if [ ! -f "$SSH_ID" ]; then
+    >&2 echo "Error: unable to read $SSH_ID."
+    exit 1
+fi
+
 BACKUP_MOUNT_FLAGS="ro"
 
 if [[ "$1" == "extract" ]]; then
