@@ -10,6 +10,9 @@ SSHFS_OPTIONS="${SSHFS_OPTIONS:--o reconnect -o auto_cache -o cache=yes -o cache
 SSH_ID="${SSH_ID:-$HOME/.ssh/id_rsa}"
 SSH_KNOWN_HOSTS="${SSH_KNOWN_HOSTS:-$HOME/.ssh/known_hosts}"
 
+if [ "$1" == "env" ]; then
+  return
+fi
 
 # http://stackoverflow.com/a/3572105/76900
 abspath() {

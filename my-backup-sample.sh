@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# Edit this file to configure your backup.
+
 # SFTP (SSH) path to back up to.
 SSH_PATH="example.com:test/"
+# SSH_ID="~/.ssh/id_rsa"
+# SSH_KNOWN_HOSTS="~/.ssh/known_hosts"
 
 # Where to keep attic encryption keys. Default: ~/.attic.
 # ATTIC_KEYS=~/.attic
@@ -37,7 +41,7 @@ EXCLUDES="
 ### End configuration -- don't edit below this line. ###
 
 if [[ -e "./backup.sh" ]]; then
-    source ./backup.sh $@
+  source ./backup.sh $@
 else
-    source $(dirname "$0")/backup.sh $@
+  source $(dirname "$0")/backup.sh $@
 fi

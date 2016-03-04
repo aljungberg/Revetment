@@ -17,12 +17,17 @@ The other benefit is security. Normally you must run your backup scripts as root
 
 ### Usage
 
-#### Install
+#### Quick and Dirty Install
+
+    curl https://raw.githubusercontent.com/aljungberg/Revetment/master/install.sh | bash 
+
+The script will (without much finesse) install Revetment and configure crontab. It's meant for Ubuntu machines with Docker already installed. Pull requests welcome for other platforms.
+
+Run at your own risk. It could wipe your system for all I know.
+
+#### Manual Install
 
     curl https://raw.githubusercontent.com/aljungberg/Revetment/master/backup.sh >backup.sh
-
-#### Configure and initialise
-
     curl https://raw.githubusercontent.com/aljungberg/Revetment/master/my-backup-sample.sh >my-backup.sh
     pico my-backup.sh   # choose backup parameters
     bash my-backup.sh init
@@ -53,5 +58,5 @@ The other benefit is security. Normally you must run your backup scripts as root
 ### Good habits
 
 - Remember to verify your backups regularly: use `bash my-backup.sh check`.
-- Extract some files from every new backup using a different machine than the one taking the backups to confirm that you have the ability to (you copied the SSH keys and attic keys you need).
+- Extract some files from every new backup using a different machine than the one taking the backups to confirm that you have the ability to (because you copied the SSH keys and attic keys you need).
 
